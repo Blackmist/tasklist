@@ -9,20 +9,31 @@ mongoose.connect('mongodb://mongooseserveraddr/tasks');
 
 exports.index = function(req, res){
   taskModel.find({}, function(err, items){
-  	console.log(items);
   	res.render('index',{title: 'My ToDo List ', tasks: items})
   })
 };
 
-exports.newItem = function (req, res){
-	task = new taskModel();
-	task.itemName = req.body.item.name;
-	task.itemCategory = req.body.item.category;
+exports.updateItem = function (req, res){
+	if(req.body.item){
+		task = new taskModel();
+		task.itemName = req.body.item.name;
+		task.itemCategory = req.body.item.category;
 
-	task.save(function(err){
-		if(err){
-			console.log(err);
-		}
-		res.redirect('home');
-	});
+		task.save(function(err){
+			if(err){
+				console.log(err);
+			}
+		});
+	}else{
+    for(key in req.body){
+    	conditions = { _id: key };
+    	update = { itemCompleted: req.body[key] };
+    	taskModel.update(conditions, update, function(err){
+    		if(err){
+    			console.log(err);
+    		}
+    	});
+    }
+	}
+	res.redirect('home');
 }

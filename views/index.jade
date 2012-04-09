@@ -1,6 +1,6 @@
 h1= title
   font(color="grey") (powered by Node.js and MongoDB)
-form
+form(action="/", method="post")
   table(border="1")
     tr
       td Name
@@ -16,7 +16,8 @@ form
         - var year  = task.itemDate.getFullYear();
         td #{month + "/" + day + "/" + year}
         td
-          input(type="checkbox", name="completed", value="#{task._id}", checked=task.itemCompleted)
+          input(type="checkbox", name="#{task._id}", value="#{!task.itemCompleted}", checked=task.itemCompleted)
+  input(type="submit", value="Update tasks")
 hr
 form(action="/", method="post")
   table(border="1") 

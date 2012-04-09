@@ -30,6 +30,6 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
-app.post('/', routes.newItem);
+app.post('/', routes.updateItem);
 
 app.listen(process.env.port || 3000);
