@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
   , taskModel = require('../models/taskModel.js');
 
-mongoose.connect('mongodb://192.168.1.80/tasksx');
+mongoose.connect('mongodb://mongooseserveraddr/tasks');
 
 /*
  * GET home page.
